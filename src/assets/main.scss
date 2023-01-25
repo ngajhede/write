@@ -61,12 +61,15 @@ html::-webkit-scrollbar-thumb {
       margin: 0;
     }
 
+    ul {
+      @apply ml-0;
+    }
+
     li {
       display: flex;
 
       > label {
         flex: 0 0 auto;
-        margin-right: 0.5rem;
         user-select: none;
       }
 
