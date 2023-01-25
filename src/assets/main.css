@@ -1,0 +1,11 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html {
+  @apply bg-zinc-900 text-zinc-300 font-mono;
+}
+
+.ProseMirror {
+  @apply rounded-lg focus:outline-none p-6;
+}
