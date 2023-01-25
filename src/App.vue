@@ -1,8 +1,8 @@
 import Clock from './components/clock.vue';
 
 <template>
-  <Transition appear appear-active-class="fade-enter-active">
-    <main class="max-w-screen-sm min-h-screen mx-auto">
+  <Transition as="div" appear appear-active-class="fade-enter-active">
+    <main class="max-w-screen-sm min-h-screen mx-auto flex flex-col">
       <header class="flex items-center justify-between px-6 pt-4">
         <h1 class="font-serif italic font-medium">Write</h1>
         <DigitalClock />

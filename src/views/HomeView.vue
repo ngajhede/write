@@ -1,51 +1,32 @@
 <template>
-  <div v-if="editor">
-    <editor-content :editor="editor" />
-  </div>
+  <editor-content class="grow flex flex-col" v-if="editor" :editor="editor" />
 </template>
 
-<script lang="ts">
+<script setup lang="ts">
+import { onBeforeUnmount, onMounted } from "vue";
+import { Editor, EditorContent, useEditor } from "@tiptap/vue-3";
 import Document from "@tiptap/extension-document";
 import Paragraph from "@tiptap/extension-paragraph";
 import TaskItem from "@tiptap/extension-task-item";
 import TaskList from "@tiptap/extension-task-list";
 import Text from "@tiptap/extension-text";
-import { Editor, EditorContent } from "@tiptap/vue-3";
 
-export default {
-  components: {
-    EditorContent,
-  },
-
-  data() {
-    return {
-      editor: null as Editor | null,
-    };
-  },
-
-  mounted() {
-    this.editor = new Editor({
-      extensions: [
-        Document,
-        Paragraph,
-        Text,
-        TaskList,
-        TaskItem.configure({
-          nested: true,
-        }),
-      ],
-      content: `
-        <p>Welcome to a new note</p>
-        <p></p>
-        <p>Create a new task list by typing [ ] or [x]</p>
-      `,
-    });
-  },
-
-  beforeUnmount() {
-    this.editor?.destroy();
-  },
-};
+const editor = useEditor({
+  extensions: [
+    Document,
+    Paragraph,
+    Text,
+    TaskList,
+    TaskItem.configure({
+      nested: true,
+    }),
+  ],
+  content: `
+          <p>Welcome to a new note</p>
+          <p></p>
+          <p>Create a new task list by typing [ ] or [x]</p>
+        `,
+});
 </script>
 
 <style lang="scss">
