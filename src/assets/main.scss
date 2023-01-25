@@ -29,20 +29,62 @@ html::-webkit-scrollbar-thumb {
     margin-top: 0.75em;
   }
 
-  ul,
   ol {
     @apply list-decimal ml-1;
+
+    ol {
+      @apply list-decimal ml-4;
+
+      li::marker {
+        @apply text-zinc-500;
+      }
+    }
   }
 
   ul {
     @apply list-disc ml-1;
+
+    ul {
+      @apply list-disc ml-4;
+
+      li::marker {
+        @apply text-zinc-500;
+      }
+    }
   }
 
-  ul ul {
-    @apply list-disc ml-4;
+  ul[data-type="taskList"] {
+    list-style: none;
+    padding: 0;
 
-    li::marker {
-      @apply text-zinc-500;
+    p {
+      margin: 0;
+    }
+
+    li {
+      display: flex;
+
+      > label {
+        flex: 0 0 auto;
+        margin-right: 0.5rem;
+        user-select: none;
+      }
+
+      > div {
+        flex: 1 1 auto;
+      }
+    }
+  }
+
+  input[type="checkbox"] {
+    @apply appearance-none border border-zinc-500 rounded-sm w-4 h-4 mr-2 transition duration-200 ease-in-out;
+
+    &:checked {
+      @apply bg-zinc-200;
+    }
+
+    &:focus {
+      @apply ring-2 ring-zinc-500;
     }
   }
 }
