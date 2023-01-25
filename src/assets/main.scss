@@ -24,4 +24,25 @@ html::-webkit-scrollbar-thumb {
 
 .ProseMirror {
   @apply rounded-lg focus:outline-none p-6 grow;
+
+  > * + * {
+    margin-top: 0.75em;
+  }
+
+  ul,
+  ol {
+    @apply list-decimal ml-1;
+  }
+
+  ul {
+    @apply list-disc ml-1;
+  }
+
+  ul ul {
+    @apply list-disc ml-4;
+
+    li::marker {
+      @apply text-zinc-500;
+    }
+  }
 }

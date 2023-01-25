@@ -9,6 +9,9 @@ import Document from "@tiptap/extension-document";
 import Paragraph from "@tiptap/extension-paragraph";
 import TaskItem from "@tiptap/extension-task-item";
 import TaskList from "@tiptap/extension-task-list";
+import ListItem from "@tiptap/extension-list-item";
+import OrderedList from "@tiptap/extension-ordered-list";
+import BulletList from "@tiptap/extension-bullet-list";
 import Text from "@tiptap/extension-text";
 
 const editor = useEditor({
@@ -16,6 +19,9 @@ const editor = useEditor({
     Document,
     Paragraph,
     Text,
+    OrderedList,
+    BulletList,
+    ListItem,
     TaskList,
     TaskItem.configure({
       nested: true,
@@ -29,7 +35,7 @@ const editor = useEditor({
 });
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 ul[data-type="taskList"] {
   list-style: none;
   padding: 0;
@@ -51,5 +57,14 @@ ul[data-type="taskList"] {
       flex: 1 1 auto;
     }
   }
+}
+
+> * + * {
+  margin-top: 0.75em;
+}
+
+ul,
+ol {
+  padding: 0 1rem;
 }
 </style>
