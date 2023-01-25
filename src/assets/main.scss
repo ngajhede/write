@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 html {
-  @apply bg-zinc-900 text-zinc-300 font-mono;
+  @apply bg-zinc-900 text-zinc-300 font-mono px-6 lg:px-0;
 }
 
 html::-webkit-scrollbar-track {
