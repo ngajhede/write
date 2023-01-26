@@ -5,6 +5,11 @@ import Clock from './components/clock.vue';
     <main class="max-w-screen-sm min-h-screen mx-auto flex flex-col">
       <header class="flex items-center justify-between px-6 pt-4">
         <h1 class="font-serif italic font-medium">Write</h1>
+        <Transition name="fade">
+          <span v-if="saveError">
+            {{ saveError }}
+          </span>
+        </Transition>
         <DigitalClock />
       </header>
       <RouterView />
@@ -13,7 +18,32 @@ import Clock from './components/clock.vue';
 </template>
 
 <script lang="ts" setup>
+import { onMounted, ref } from "vue";
 import DigitalClock from "./components/DigitalClock.vue";
+
+let saveError = ref<string | null>(null);
+
+const saveErrorMessages = [
+  "No need to save...",
+  "Your notes are automatically saved",
+  "Your note is already saved",
+];
+
+onMounted(() => {
+  //intercept CTRL S keyboard presses
+  document.addEventListener("keydown", (e) => {
+    if (e.ctrlKey && e.key === "s") {
+      e.preventDefault();
+      // show a random message
+      const randomIndex = Math.floor(Math.random() * saveErrorMessages.length);
+      saveError.value = saveErrorMessages[randomIndex];
+
+      setTimeout(() => {
+        saveError.value = null;
+      }, 3000);
+    }
+  });
+});
 </script>
 
 <style lang="scss">
@@ -30,5 +60,15 @@ import DigitalClock from "./components/DigitalClock.vue";
   to {
     opacity: 1;
   }
+}
+
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 3s ease-out;
+}
+
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
 }
 </style>
