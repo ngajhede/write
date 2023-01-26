@@ -14,6 +14,14 @@ import OrderedList from "@tiptap/extension-ordered-list";
 import BulletList from "@tiptap/extension-bullet-list";
 import Text from "@tiptap/extension-text";
 
+const initialContent =
+  localStorage.getItem("content") ??
+  `
+          <p>Welcome to a new note</p>
+          <p></p>
+          <p>Create a new task list by typing [ ] or [x]</p>
+        `;
+
 const editor = useEditor({
   extensions: [
     Document,
@@ -27,10 +35,9 @@ const editor = useEditor({
       nested: true,
     }),
   ],
-  content: `
-          <p>Welcome to a new note</p>
-          <p></p>
-          <p>Create a new task list by typing [ ] or [x]</p>
-        `,
+  onUpdate: ({ editor }) => {
+    localStorage.setItem("content", editor.getHTML());
+  },
+  content: initialContent,
 });
 </script>
